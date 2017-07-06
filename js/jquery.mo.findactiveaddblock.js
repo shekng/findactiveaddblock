@@ -4,6 +4,8 @@ findactiveaddblock - detect one element is shown in viewport
 properties
     delay
 events
+    onRender
+        context - this
     onGetDomElement         
         input - object (in children array)
     onActive
