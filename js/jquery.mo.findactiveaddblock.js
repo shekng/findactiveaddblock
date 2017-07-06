@@ -38,7 +38,7 @@ $(".wrapper").findactiveaddblock({
 
 $(".wrapper").data("findactiveaddblock").destroy();
 ===============================================*/
-define("findactiveaddblock", ["jquery", "underscore"], function (JQuery, _) {
+define("findactiveaddblock", ["jquery", "underscore"], function (jQuery, _) {
 	;( function( $, window, document, undefined ) {
 		"use strict";
 
