@@ -1,0 +1,41 @@
+#fixheader {
+    position: fixed;
+    border: 1px red solid;
+    height: 50px;
+    width: 98%;
+    padding: 10px;
+    background-color: white;
+}
+
+.block {
+  height: 50vh;
+  margin: 20px;
+  border-radius: 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 10rem;
+  color: white;
+  box-shadow: 0 16px 24px 2px rgba(0,0,0,0.14), 0 6px 30px 5px rgba(0,0,0,0.12), 0 8px 10px -5px rgba(0,0,0,0.3);
+}
+
+.block--1 {
+  background: #2980b9;
+}
+
+.block--2 {
+  background: #16a085;
+}
+
+.block--3 {
+  background: #f1c40f;
+}
+
+.block--4 {
+  background: #e74c3c;
+}
+
+.block--5 {
+  background: #9b59b6;
+  height: 150px;
+}
