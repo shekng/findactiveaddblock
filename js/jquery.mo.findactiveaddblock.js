@@ -19,7 +19,12 @@ ie
 
 $(".wrapper").findactiveaddblock({
     delay: 1000,
-    children: $('.block'),        
+    children: $('.block'),      
+    onRender: function() {
+        if (this.results.length === 1) {  
+            window.scrollBy(0, 300);
+        }
+    },
     onGetDomElement: function(obj) {
         return obj;  
     },   
