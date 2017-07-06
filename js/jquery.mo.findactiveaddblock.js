@@ -38,11 +38,14 @@ define("findactiveaddblock", ["jquery", "underscore"], function (JQuery, _) {
 		// Create the defaults once
 		var pluginName = "findactiveaddblock",
 			defaults = {
-				delay: 200,
-				scrollableParent: window,
-				checkOnStart: false,
 				children: null,
-				onScrollEnd: null
+                delay: 200,				
+                scrollableParent: window,
+				checkOnStart: false,
+                onRender: undefined,
+                onGetDomElement: undefined,
+                onActive: undefined,
+                onInActive: undefined,								
 			};
 
 		// The actual plugin constructor
@@ -54,6 +57,7 @@ define("findactiveaddblock", ["jquery", "underscore"], function (JQuery, _) {
 			this._name = pluginName;
 			this.$scollableParent = undefined;
 			this.$previousItem = undefined;
+            this.results = [];
 			this.init();
 		}
 
@@ -71,6 +75,10 @@ define("findactiveaddblock", ["jquery", "underscore"], function (JQuery, _) {
 					me.checkViewport();
 				}				
 				me.detectScroll();
+                
+                if ($.isFunction(me.settings.onRender)) {
+                    me.settings.onRender.call(this);
+                }
 			},
 			destroy: function () {
 				var me = this;
@@ -96,8 +104,9 @@ define("findactiveaddblock", ["jquery", "underscore"], function (JQuery, _) {
 			},
 			checkViewport: function () {
 				var me = this,
-					$children = me.settings.children,
-					results = [];
+					$children = me.settings.children;
+                
+				me.results = [];
 
 				_.each($children, function (val, key) {
 					var $this;
@@ -111,11 +120,11 @@ define("findactiveaddblock", ["jquery", "underscore"], function (JQuery, _) {
 					}
 
 					if (isInViewport($this, me.$scrollableParent)) {
-						results.push({ $el: $this, obj: val });
+						me.results.push({ $el: $this, obj: val });
 					}
 				});
 
-				if (results.length === 0) {
+				if (me.results.length === 0) {
 					return;
 				}
 
@@ -124,8 +133,8 @@ define("findactiveaddblock", ["jquery", "underscore"], function (JQuery, _) {
 
 					me.callInactive();
 
-					iIdx = Math.floor((results.length - 1) / 2);
-					activeItem = results[iIdx];
+					iIdx = Math.floor((me.results.length - 1) / 2);
+					activeItem = me.results[iIdx];
 					me.settings.onActive.call(me, activeItem);
 
 					me.$previousItem = activeItem;

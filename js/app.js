@@ -32,12 +32,17 @@ require([
 function ($, findactiveaddblock) {
     $("#enable").click(function(){
         $(".wrapper").findactiveaddblock({
+            checkOnStart: true,
             children: $('.block'),
+            onRender: function() {
+                if (this.results.length === 1) {  
+                    window.scrollBy(0, 300);
+                }
+            },
             onGetDomElement: function(obj) {
                 return obj;  
             },
             onActive: function(oParam) {
-                console.log(2);
                 oParam.$el.css({border: "5px solid red"});
             },
             onInActive: function(oParam) {
@@ -59,11 +64,11 @@ function ($, findactiveaddblock) {
     $(".wrapper").findactiveaddblock({
         //children: arr,
         children: $('.block'),        
+        checkOnStart: false,
         onGetDomElement: function(obj) {
             return obj;  
         },   
         onActive: function(oParam) {
-            console.log(1);
             oParam.$el.css({border: "5px solid red"});
         },
         onInActive: function(oParam) {
