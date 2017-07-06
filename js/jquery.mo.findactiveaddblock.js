@@ -5,11 +5,11 @@ properties
     delay
 events
     onGetDomElement         
-        input - {$el}
+        input - object (in children array)
     onActive
-        input - {$el}
+        input - {$el, object (in children array)}
     onInActive
-        input - {$el}
+        input - {$el, object (in children array)}
 methods
     destroy()       // destroy plugin
 
