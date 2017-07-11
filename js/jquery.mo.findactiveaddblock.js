@@ -135,6 +135,11 @@ define("findactiveaddblock", ["jquery", "underscore"], function (jQuery, _) {
 					return;
 				}
 
+                // sort result by top 
+                // in case children are are sort by offset top
+                me.results = _.sortBy(me.results, function (obj) {
+					return obj.$el.offset().top;
+				});
 				if ($.isFunction(me.settings.onActive)) {
 					var activeItem, iIdx;
 
