@@ -65,6 +65,7 @@ define("findactiveaddblock", ["jquery", "underscore"], function (jQuery, _) {
 			this.$scollableParent = undefined;
 			this.$previousItem = undefined;
             this.results = [];
+            this.bDestroy = false;
 			this.init();
 		}
 
@@ -90,6 +91,7 @@ define("findactiveaddblock", ["jquery", "underscore"], function (jQuery, _) {
 			destroy: function () {
 				var me = this;
 
+                me.bDestroy = true;
 				// call inActive event
 				me.callInactive();
 
@@ -105,7 +107,11 @@ define("findactiveaddblock", ["jquery", "underscore"], function (jQuery, _) {
 				me.$scrollableParent.on("scroll.findactiveaddblock", function (event) {
 					clearTimeout(timer);
 					timer = setTimeout(function () {
-						me.checkViewport();
+						// coz of timeout, scroll event will still fire after plugin is destroyed
+						// so it needs to check bDestroy to check if plugin is already destroyed
+						if (!me.bDestroy) {
+							me.checkViewport();
+						}
 					}, me.settings.delay);
 				});
 			},
